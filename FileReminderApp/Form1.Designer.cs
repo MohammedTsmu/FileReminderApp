@@ -61,6 +61,7 @@
             this.lstTimes.ItemHeight = 16;
             this.lstTimes.Location = new System.Drawing.Point(68, 116);
             this.lstTimes.Name = "lstTimes";
+            this.lstTimes.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstTimes.Size = new System.Drawing.Size(477, 260);
             this.lstTimes.TabIndex = 2;
             // 

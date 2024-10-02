@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace FileReminderApp
@@ -179,16 +180,24 @@ namespace FileReminderApp
         // كود حذف الوقت المحدد من القائمة
         private void btnDeleteTime_Click(object sender, EventArgs e)
         {
-            if (lstTimes.SelectedItem != null) // التأكد من تحديد وقت
+            if (lstTimes.SelectedItems.Count > 0) // التأكد من تحديد أوقات
             {
-                lstTimes.Items.Remove(lstTimes.SelectedItem);
-                MessageBox.Show("تم حذف الوقت بنجاح!", "حذف الوقت", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // جمع الأوقات المحددة في قائمة مؤقتة لحذفها
+                var selectedTimes = lstTimes.SelectedItems.Cast<string>().ToList();
+
+                foreach (var time in selectedTimes)
+                {
+                    lstTimes.Items.Remove(time);
+                }
+
+                MessageBox.Show("تم حذف الأوقات المحددة بنجاح!", "حذف الأوقات", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("الرجاء تحديد وقت لحذفه!", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("الرجاء تحديد الأوقات المراد حذفها!", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
 
         // كود إزالة مسار الملف

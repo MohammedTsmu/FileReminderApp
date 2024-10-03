@@ -24,24 +24,6 @@ namespace FileReminderApp
             SetupReminderTimer(); // تشغيل المؤقت
         }
 
-        // كود اختيار الملف
-        private void btnUploadFile_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Text Files|*.txt|Word Documents|*.docx";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                txtFilePath.Text = openFileDialog.FileName;
-                MessageBox.Show("تم تحميل الملف بنجاح!", "تحميل الملف", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("فشل في تحميل الملف!", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        // كود إضافة ملفات متعددة
         // كود إضافة ملفات متعددة
         private void btnUploadFiles_Click(object sender, EventArgs e)
         {
@@ -72,7 +54,6 @@ namespace FileReminderApp
                 MessageBox.Show("فشل في تحميل الملفات!", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         // كود إضافة وقت تذكير جديد باستخدام TimePicker
         private void btnAddTime_Click(object sender, EventArgs e)
@@ -109,7 +90,6 @@ namespace FileReminderApp
                 MessageBox.Show("الرجاء تحديد ملف لإضافة التذكير إليه!", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
 
         //Timer Settings
         private Timer reminderTimer = new Timer();
@@ -150,8 +130,6 @@ namespace FileReminderApp
             }
         }
 
-
-
         //تعديل دالة ShowReminder للتعامل مع ملفات متعددة
         private void ShowReminder(string filePath)
         {
@@ -168,8 +146,6 @@ namespace FileReminderApp
                 MessageBox.Show($"فشل في فتح الملف: {ex.Message}", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
 
         // حفظ الإعدادات
         private void SaveSettings()
@@ -272,15 +248,12 @@ namespace FileReminderApp
             }
         }
 
-
-
         // حدث الحفظ عند الضغط على زر الحفظ
         private void btnSaveSettings_Click(object sender, EventArgs e)
         {
             SaveSettings(); // استدعاء دالة حفظ الإعدادات
         }
 
-        // كود حذف الوقت المحدد من القائمة
         // كود حذف الوقت المحدد من القائمة
         private void btnDeleteTime_Click(object sender, EventArgs e)
         {
@@ -322,21 +295,7 @@ namespace FileReminderApp
             }
         }
 
-
-        // كود إزالة مسار الملف
-        private void btnRemoveFile_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtFilePath.Text)) // التأكد من وجود مسار ملف
-            {
-                txtFilePath.Clear(); // مسح مسار الملف
-                MessageBox.Show("تم إزالة الملف بنجاح!", "إزالة الملف", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("لا يوجد ملف لإزالته!", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
+        // كود تحديث قائمة التذكيرات
         private void UpdateTimesList()
         {
             // مسح القائمة الحالية
@@ -355,8 +314,6 @@ namespace FileReminderApp
             }
         }
 
-
-        // كود حذف الملف المحدد
         // كود حذف الملف المحدد
         private void btnDeleteFile_Click(object sender, EventArgs e)
         {
@@ -386,6 +343,5 @@ namespace FileReminderApp
                 MessageBox.Show("الرجاء تحديد ملف لحذفه!", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
     }
 }

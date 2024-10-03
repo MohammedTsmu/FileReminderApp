@@ -61,7 +61,7 @@ namespace FileReminderApp
             if (listViewFiles.SelectedItems.Count > 0)
             {
                 string selectedTime = timePickerReminder.Value.ToString("HH:mm");
-                string selectedFile = listViewFiles.SelectedItems[0].Text; // الحصول على الملف المحدد
+                string selectedFile = listViewFiles.SelectedItems[0].Tag.ToString(); // الحصول على المسار الكامل للملف
 
                 // تحقق من عدم وجود التذكير مسبقًا في fileReminders
                 if (fileReminders.ContainsKey(selectedFile))
@@ -108,7 +108,7 @@ namespace FileReminderApp
 
             foreach (var fileReminder in fileReminders)
             {
-                string fileName = fileReminder.Key; // اسم الملف
+                string filePath = fileReminder.Key; // المسار الكامل للملف
                 List<string> reminders = fileReminder.Value; // التذكيرات الخاصة بهذا الملف
 
                 foreach (string time in reminders)
@@ -117,13 +117,7 @@ namespace FileReminderApp
                     {
                         if (currentTime.Hour == reminderTime.Hour && currentTime.Minute == reminderTime.Minute)
                         {
-                            // استخدم المسار الكامل للملف بدلاً من اسم الملف فقط
-                            var fileItem = listViewFiles.Items.Cast<ListViewItem>().FirstOrDefault(item => item.Text == fileName);
-                            if (fileItem != null && fileItem.Tag != null)
-                            {
-                                string filePath = fileItem.Tag.ToString();
-                                ShowReminder(filePath); // تمرير المسار الكامل للملف
-                            }
+                            ShowReminder(filePath); // تمرير المسار الكامل للملف
                         }
                     }
                 }
@@ -131,12 +125,13 @@ namespace FileReminderApp
         }
 
         //تعديل دالة ShowReminder للتعامل مع ملفات متعددة
+        // تعديل ShowReminder لفتح الملف باستخدام المسار الكامل
         private void ShowReminder(string filePath)
         {
             try
             {
-                // عرض المسار الكامل في رسالة
-                MessageBox.Show($"تذكير بالملف: {filePath}!", "تذكير", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // عرض المسار الكامل في رسالة للتأكد من أن المسار صحيح
+                MessageBox.Show($"فتح الملف: {filePath}", "تذكير", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // فتح الملف باستخدام المسار الكامل
                 System.Diagnostics.Process.Start(filePath);
@@ -146,6 +141,7 @@ namespace FileReminderApp
                 MessageBox.Show($"فشل في فتح الملف: {ex.Message}", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         // حفظ الإعدادات
         private void SaveSettings()
@@ -205,14 +201,17 @@ namespace FileReminderApp
             {
                 foreach (string filePath in Properties.Settings.Default.UploadedFiles)
                 {
-                    // التأكد من عدم تكرار الملفات
-                    string fileName = System.IO.Path.GetFileName(filePath);
-                    if (!listViewFiles.Items.Cast<ListViewItem>().Any(item => item.Text == fileName))
+                    // التأكد من تحميل المسار الكامل للملف وليس فقط الاسم
+                    if (!listViewFiles.Items.Cast<ListViewItem>().Any(item => item.Tag != null && item.Tag.ToString() == filePath))
                     {
-                        var listViewItem = new ListViewItem(fileName)
+                        var listViewItem = new ListViewItem(System.IO.Path.GetFileName(filePath))
                         {
                             Tag = filePath // تخزين المسار الكامل في Tag
                         };
+
+                        // عرض رسالة للتحقق من المسار المحمل
+                        MessageBox.Show($"تم تحميل الملف: {filePath}");
+
                         listViewFiles.Items.Add(listViewItem);
                     }
                 }
@@ -232,15 +231,15 @@ namespace FileReminderApp
 
                         // التأكد من أن الملف موجود
                         string fileName = System.IO.Path.GetFileName(filePath);
-                        if (!fileReminders.ContainsKey(fileName))
+                        if (!fileReminders.ContainsKey(filePath))
                         {
-                            fileReminders[fileName] = new List<string>();
+                            fileReminders[filePath] = new List<string>();
                         }
 
                         // تأكد من عدم إضافة التذكير مرة أخرى إذا كان موجودًا بالفعل
-                        if (!fileReminders[fileName].Contains(time))
+                        if (!fileReminders[filePath].Contains(time))
                         {
-                            fileReminders[fileName].Add(time);
+                            fileReminders[filePath].Add(time);
                             lstTimes.Items.Add($"{fileName} - {time}");
                         }
                     }
@@ -270,18 +269,18 @@ namespace FileReminderApp
                     string[] parts = time.Split('-');
                     if (parts.Length == 2)
                     {
-                        string fileName = parts[0].Trim();
+                        string filePath = parts[0].Trim();
                         string reminderTime = parts[1].Trim();
 
                         // حذف التذكير من fileReminders
-                        if (fileReminders.ContainsKey(fileName))
+                        if (fileReminders.ContainsKey(filePath))
                         {
-                            fileReminders[fileName].Remove(reminderTime);
+                            fileReminders[filePath].Remove(reminderTime);
 
                             // إذا لم يعد هناك تذكيرات للملف، قم بحذفه من fileReminders
-                            if (fileReminders[fileName].Count == 0)
+                            if (fileReminders[filePath].Count == 0)
                             {
-                                fileReminders.Remove(fileName);
+                                fileReminders.Remove(filePath);
                             }
                         }
                     }
@@ -321,15 +320,15 @@ namespace FileReminderApp
             {
                 foreach (ListViewItem selectedItem in listViewFiles.SelectedItems)
                 {
-                    string fileName = selectedItem.Text;
+                    string filePath = selectedItem.Tag.ToString();
 
                     // حذف الملف من ListView
                     listViewFiles.Items.Remove(selectedItem);
 
                     // حذف التذكيرات المرتبطة بهذا الملف من fileReminders
-                    if (fileReminders.ContainsKey(fileName))
+                    if (fileReminders.ContainsKey(filePath))
                     {
-                        fileReminders.Remove(fileName);
+                        fileReminders.Remove(filePath);
                     }
 
                     // تحديث قائمة التذكيرات (lstTimes) بعد حذف الملف

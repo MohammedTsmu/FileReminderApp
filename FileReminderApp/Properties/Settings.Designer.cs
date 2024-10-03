@@ -45,5 +45,16 @@ namespace FileReminderApp.Properties {
                 this["ReminderTimes"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection UploadedFiles {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["UploadedFiles"]));
+            }
+            set {
+                this["UploadedFiles"] = value;
+            }
+        }
     }
 }

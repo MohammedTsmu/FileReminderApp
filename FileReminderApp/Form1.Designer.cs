@@ -36,13 +36,16 @@
             this.timePickerReminder = new System.Windows.Forms.DateTimePicker();
             this.btnDeleteTime = new System.Windows.Forms.Button();
             this.btnRemoveFile = new System.Windows.Forms.Button();
+            this.listViewFiles = new System.Windows.Forms.ListView();
+            this.btnUploadFiles = new System.Windows.Forms.Button();
+            this.btnDeleteFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnUploadFile
             // 
-            this.btnUploadFile.Location = new System.Drawing.Point(568, 76);
+            this.btnUploadFile.Location = new System.Drawing.Point(328, 477);
             this.btnUploadFile.Name = "btnUploadFile";
-            this.btnUploadFile.Size = new System.Drawing.Size(152, 54);
+            this.btnUploadFile.Size = new System.Drawing.Size(152, 81);
             this.btnUploadFile.TabIndex = 0;
             this.btnUploadFile.Text = "Upload File";
             this.btnUploadFile.UseVisualStyleBackColor = true;
@@ -50,26 +53,26 @@
             // 
             // txtFilePath
             // 
-            this.txtFilePath.Location = new System.Drawing.Point(68, 76);
+            this.txtFilePath.Location = new System.Drawing.Point(12, 46);
             this.txtFilePath.Name = "txtFilePath";
-            this.txtFilePath.Size = new System.Drawing.Size(477, 22);
+            this.txtFilePath.Size = new System.Drawing.Size(507, 22);
             this.txtFilePath.TabIndex = 1;
             // 
             // lstTimes
             // 
             this.lstTimes.FormattingEnabled = true;
             this.lstTimes.ItemHeight = 16;
-            this.lstTimes.Location = new System.Drawing.Point(68, 116);
+            this.lstTimes.Location = new System.Drawing.Point(12, 74);
             this.lstTimes.Name = "lstTimes";
             this.lstTimes.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstTimes.Size = new System.Drawing.Size(477, 260);
+            this.lstTimes.Size = new System.Drawing.Size(1099, 148);
             this.lstTimes.TabIndex = 2;
             // 
             // btnAddTime
             // 
-            this.btnAddTime.Location = new System.Drawing.Point(568, 136);
+            this.btnAddTime.Location = new System.Drawing.Point(486, 477);
             this.btnAddTime.Name = "btnAddTime";
-            this.btnAddTime.Size = new System.Drawing.Size(152, 54);
+            this.btnAddTime.Size = new System.Drawing.Size(152, 81);
             this.btnAddTime.TabIndex = 4;
             this.btnAddTime.Text = "Add Time";
             this.btnAddTime.UseVisualStyleBackColor = true;
@@ -77,9 +80,9 @@
             // 
             // btnSaveSettings
             // 
-            this.btnSaveSettings.Location = new System.Drawing.Point(568, 196);
+            this.btnSaveSettings.Location = new System.Drawing.Point(644, 477);
             this.btnSaveSettings.Name = "btnSaveSettings";
-            this.btnSaveSettings.Size = new System.Drawing.Size(152, 54);
+            this.btnSaveSettings.Size = new System.Drawing.Size(152, 81);
             this.btnSaveSettings.TabIndex = 5;
             this.btnSaveSettings.Text = "Save Settings";
             this.btnSaveSettings.UseVisualStyleBackColor = true;
@@ -88,17 +91,17 @@
             // timePickerReminder
             // 
             this.timePickerReminder.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.timePickerReminder.Location = new System.Drawing.Point(68, 48);
+            this.timePickerReminder.Location = new System.Drawing.Point(12, 18);
             this.timePickerReminder.Name = "timePickerReminder";
             this.timePickerReminder.ShowUpDown = true;
-            this.timePickerReminder.Size = new System.Drawing.Size(477, 22);
+            this.timePickerReminder.Size = new System.Drawing.Size(507, 22);
             this.timePickerReminder.TabIndex = 6;
             // 
             // btnDeleteTime
             // 
-            this.btnDeleteTime.Location = new System.Drawing.Point(568, 256);
+            this.btnDeleteTime.Location = new System.Drawing.Point(802, 477);
             this.btnDeleteTime.Name = "btnDeleteTime";
-            this.btnDeleteTime.Size = new System.Drawing.Size(152, 54);
+            this.btnDeleteTime.Size = new System.Drawing.Size(152, 81);
             this.btnDeleteTime.TabIndex = 7;
             this.btnDeleteTime.Text = "Delete Selected Time";
             this.btnDeleteTime.UseVisualStyleBackColor = true;
@@ -106,19 +109,53 @@
             // 
             // btnRemoveFile
             // 
-            this.btnRemoveFile.Location = new System.Drawing.Point(568, 316);
+            this.btnRemoveFile.Location = new System.Drawing.Point(960, 477);
             this.btnRemoveFile.Name = "btnRemoveFile";
-            this.btnRemoveFile.Size = new System.Drawing.Size(152, 54);
+            this.btnRemoveFile.Size = new System.Drawing.Size(152, 81);
             this.btnRemoveFile.TabIndex = 8;
             this.btnRemoveFile.Text = "Remove Uploaded File";
             this.btnRemoveFile.UseVisualStyleBackColor = true;
             this.btnRemoveFile.Click += new System.EventHandler(this.btnRemoveFile_Click);
             // 
+            // listViewFiles
+            // 
+            this.listViewFiles.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.listViewFiles.HideSelection = false;
+            this.listViewFiles.Location = new System.Drawing.Point(12, 228);
+            this.listViewFiles.Name = "listViewFiles";
+            this.listViewFiles.Size = new System.Drawing.Size(1099, 243);
+            this.listViewFiles.TabIndex = 9;
+            this.listViewFiles.UseCompatibleStateImageBehavior = false;
+            this.listViewFiles.View = System.Windows.Forms.View.List;
+            // 
+            // btnUploadFiles
+            // 
+            this.btnUploadFiles.Location = new System.Drawing.Point(12, 477);
+            this.btnUploadFiles.Name = "btnUploadFiles";
+            this.btnUploadFiles.Size = new System.Drawing.Size(152, 81);
+            this.btnUploadFiles.TabIndex = 10;
+            this.btnUploadFiles.Text = "Upload Multi-Files";
+            this.btnUploadFiles.UseVisualStyleBackColor = true;
+            this.btnUploadFiles.Click += new System.EventHandler(this.btnUploadFiles_Click);
+            // 
+            // btnDeleteFile
+            // 
+            this.btnDeleteFile.Location = new System.Drawing.Point(170, 477);
+            this.btnDeleteFile.Name = "btnDeleteFile";
+            this.btnDeleteFile.Size = new System.Drawing.Size(152, 81);
+            this.btnDeleteFile.TabIndex = 11;
+            this.btnDeleteFile.Text = "Delete Spesific Files";
+            this.btnDeleteFile.UseVisualStyleBackColor = true;
+            this.btnDeleteFile.Click += new System.EventHandler(this.btnDeleteFile_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1123, 570);
+            this.Controls.Add(this.btnDeleteFile);
+            this.Controls.Add(this.btnUploadFiles);
+            this.Controls.Add(this.listViewFiles);
             this.Controls.Add(this.btnRemoveFile);
             this.Controls.Add(this.btnDeleteTime);
             this.Controls.Add(this.timePickerReminder);
@@ -145,6 +182,9 @@
         private System.Windows.Forms.DateTimePicker timePickerReminder;
         private System.Windows.Forms.Button btnDeleteTime;
         private System.Windows.Forms.Button btnRemoveFile;
+        private System.Windows.Forms.ListView listViewFiles;
+        private System.Windows.Forms.Button btnUploadFiles;
+        private System.Windows.Forms.Button btnDeleteFile;
     }
 }
 

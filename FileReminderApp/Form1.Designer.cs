@@ -39,6 +39,7 @@
             this.btnDeleteFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.chkRunAtStartup = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lstTimes
@@ -172,12 +173,26 @@
             this.label2.TabIndex = 13;
             this.label2.Text = "Uploaded Files";
             // 
+            // chkRunAtStartup
+            // 
+            this.chkRunAtStartup.AutoSize = true;
+            this.chkRunAtStartup.BackColor = System.Drawing.Color.DimGray;
+            this.chkRunAtStartup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkRunAtStartup.ForeColor = System.Drawing.SystemColors.Window;
+            this.chkRunAtStartup.Location = new System.Drawing.Point(882, 30);
+            this.chkRunAtStartup.Name = "chkRunAtStartup";
+            this.chkRunAtStartup.Size = new System.Drawing.Size(252, 29);
+            this.chkRunAtStartup.TabIndex = 14;
+            this.chkRunAtStartup.Text = "Start on Windows startup";
+            this.chkRunAtStartup.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(1162, 633);
+            this.Controls.Add(this.chkRunAtStartup);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDeleteFile);
@@ -211,6 +226,7 @@
         private System.Windows.Forms.Button btnDeleteFile;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chkRunAtStartup;
     }
 }
 

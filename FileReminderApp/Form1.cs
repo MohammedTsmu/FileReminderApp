@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Forms;
+using Microsoft.Win32; // Required for Registry access
+
 
 namespace FileReminderApp
 {
@@ -41,6 +43,9 @@ namespace FileReminderApp
         {
             LoadSettings(); // تحميل الإعدادات المحفوظة
             SetupReminderTimer(); // تشغيل المؤقت
+
+            // Check if the app is set to run at startup and set the checkbox accordingly
+            chkRunAtStartup.Checked = IsStartupEnabled();
         }
 
         // كود التعامل مع زر Minimize
@@ -377,5 +382,43 @@ namespace FileReminderApp
                 MessageBox.Show("الرجاء تحديد ملف لحذفه!", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        // Method to add or remove the app from startup
+        private void SetStartup(bool enable)
+        {
+            string appName = "FileReminderApp"; // Name of your app in the registry
+            string exePath = Application.ExecutablePath; // Path to your executable
+
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+
+            if (enable)
+            {
+                // Add the app to startup
+                registryKey.SetValue(appName, exePath);
+            }
+            else
+            {
+                // Remove the app from startup
+                registryKey.DeleteValue(appName, false);
+            }
+        }
+
+        // Check if the app is already set to run at startup
+        private bool IsStartupEnabled()
+        {
+            string appName = "FileReminderApp";
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", false);
+            if (registryKey == null)
+                return false;
+
+            return registryKey.GetValue(appName) != null;
+        }
+
+        private void chkRunAtStartup_CheckedChanged(object sender, EventArgs e)
+        {
+            // Enable or disable startup based on checkbox status
+            SetStartup(chkRunAtStartup.Checked);
+        }
+
     }
 }

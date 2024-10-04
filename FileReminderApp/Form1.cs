@@ -11,10 +11,29 @@ namespace FileReminderApp
         // Dictionary لتخزين الملفات والتذكيرات
         private Dictionary<string, List<string>> fileReminders = new Dictionary<string, List<string>>();
 
+        // إضافة كائن NotifyIcon لعرض أيقونة التطبيق في System Tray
+        private NotifyIcon trayIcon;
+
         public Form1()
         {
             InitializeComponent();
             LoadSettings();
+
+            // إعداد NotifyIcon
+            trayIcon = new NotifyIcon
+            {
+                Icon = this.Icon, // استخدام أيقونة التطبيق
+                Text = "File Reminder App", // النص الذي يظهر عند وضع المؤشر على الأيقونة في System Tray
+                Visible = true // التأكد من إظهار الأيقونة في System Tray
+            };
+
+            // إضافة خيار للنقر المزدوج على الأيقونة لإظهار التطبيق مرة أخرى
+            trayIcon.DoubleClick += (sender, e) =>
+            {
+                this.Show();
+                this.WindowState = FormWindowState.Normal; // إعادة النافذة لحالتها الطبيعية
+                this.ShowInTaskbar = true; // إظهار النافذة في شريط المهام
+            };
         }
 
         // هذا الحدث يتم استدعاؤه عند تحميل النموذج
@@ -22,6 +41,26 @@ namespace FileReminderApp
         {
             LoadSettings(); // تحميل الإعدادات المحفوظة
             SetupReminderTimer(); // تشغيل المؤقت
+        }
+
+        // كود التعامل مع زر Minimize
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide(); // إخفاء النافذة
+                this.ShowInTaskbar = false; // إخفاء النافذة من شريط المهام
+            }
+        }
+
+        // كود التعامل مع زر Close (X) لمنع إغلاق التطبيق
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            e.Cancel = true; // إلغاء عملية الإغلاق
+            this.Hide(); // إخفاء النافذة
+            this.ShowInTaskbar = false; // إخفاء النافذة من شريط المهام
+            base.OnFormClosing(e);
         }
 
         // كود إضافة ملفات متعددة
@@ -142,7 +181,6 @@ namespace FileReminderApp
             }
         }
 
-
         // حفظ الإعدادات
         private void SaveSettings()
         {
@@ -208,9 +246,6 @@ namespace FileReminderApp
                         {
                             Tag = filePath // تخزين المسار الكامل في Tag
                         };
-
-                        // عرض رسالة للتحقق من المسار المحمل
-                        MessageBox.Show($"تم تحميل الملف: {filePath}");
 
                         listViewFiles.Items.Add(listViewItem);
                     }

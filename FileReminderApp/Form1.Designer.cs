@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lstTimes = new System.Windows.Forms.ListBox();
             this.btnAddTime = new System.Windows.Forms.Button();
@@ -41,6 +43,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chkRunAtStartup = new System.Windows.Forms.CheckBox();
             this.chkStartMinimized = new System.Windows.Forms.CheckBox();
+            this.svgAbout = new DevExpress.XtraEditors.SvgImageBox();
+            ((System.ComponentModel.ISupportInitialize)(this.svgAbout)).BeginInit();
             this.SuspendLayout();
             // 
             // lstTimes
@@ -176,13 +180,12 @@
             // 
             // chkRunAtStartup
             // 
-            this.chkRunAtStartup.AutoSize = true;
             this.chkRunAtStartup.BackColor = System.Drawing.Color.DimGray;
             this.chkRunAtStartup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkRunAtStartup.ForeColor = System.Drawing.SystemColors.Window;
-            this.chkRunAtStartup.Location = new System.Drawing.Point(832, 30);
+            this.chkRunAtStartup.Location = new System.Drawing.Point(803, 34);
             this.chkRunAtStartup.Name = "chkRunAtStartup";
-            this.chkRunAtStartup.Size = new System.Drawing.Size(252, 29);
+            this.chkRunAtStartup.Size = new System.Drawing.Size(260, 29);
             this.chkRunAtStartup.TabIndex = 14;
             this.chkRunAtStartup.Text = "Start on Windows startup";
             this.chkRunAtStartup.UseVisualStyleBackColor = false;
@@ -190,11 +193,10 @@
             // 
             // chkStartMinimized
             // 
-            this.chkStartMinimized.AutoSize = true;
             this.chkStartMinimized.BackColor = System.Drawing.Color.DimGray;
             this.chkStartMinimized.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkStartMinimized.ForeColor = System.Drawing.SystemColors.Window;
-            this.chkStartMinimized.Location = new System.Drawing.Point(832, 65);
+            this.chkStartMinimized.Location = new System.Drawing.Point(803, 69);
             this.chkStartMinimized.Name = "chkStartMinimized";
             this.chkStartMinimized.Size = new System.Drawing.Size(260, 29);
             this.chkStartMinimized.TabIndex = 15;
@@ -202,12 +204,26 @@
             this.chkStartMinimized.UseVisualStyleBackColor = false;
             this.chkStartMinimized.CheckedChanged += new System.EventHandler(this.chkStartMinimized_CheckedChanged);
             // 
+            // svgAbout
+            // 
+            this.svgAbout.Location = new System.Drawing.Point(1069, 34);
+            this.svgAbout.Name = "svgAbout";
+            this.svgAbout.Size = new System.Drawing.Size(63, 64);
+            toolTipItem1.Text = "About this application";
+            superToolTip1.Items.Add(toolTipItem1);
+            this.svgAbout.SuperTip = superToolTip1;
+            this.svgAbout.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("svgAbout.SvgImage")));
+            this.svgAbout.TabIndex = 16;
+            this.svgAbout.Text = "svgImageBox1";
+            this.svgAbout.Click += new System.EventHandler(this.svgAbout_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(1162, 633);
+            this.Controls.Add(this.svgAbout);
             this.Controls.Add(this.chkStartMinimized);
             this.Controls.Add(this.chkRunAtStartup);
             this.Controls.Add(this.label2);
@@ -225,8 +241,8 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "File Reminder";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.svgAbout)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,6 +261,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkRunAtStartup;
         private System.Windows.Forms.CheckBox chkStartMinimized;
+        private DevExpress.XtraEditors.SvgImageBox svgAbout;
     }
 }
 

@@ -442,6 +442,11 @@ namespace FileReminderApp
             Properties.Settings.Default.Save();
         }
 
-
+        private void svgAbout_Click(object sender, EventArgs e)
+        {
+            var aboutForm = new About();
+            aboutForm.ShowDialog(); // عرض نموذج "حول" كنافذة حوار
+            aboutForm.Dispose(); // تحرير الموارد بعد إغلاق النموذج
+        }
     }
 }

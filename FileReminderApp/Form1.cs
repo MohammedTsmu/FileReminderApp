@@ -414,11 +414,11 @@ namespace FileReminderApp
             return registryKey.GetValue(appName) != null;
         }
 
+
         private void chkRunAtStartup_CheckedChanged(object sender, EventArgs e)
         {
             // Enable or disable startup based on checkbox status
             SetStartup(chkRunAtStartup.Checked);
         }
-
     }
 }

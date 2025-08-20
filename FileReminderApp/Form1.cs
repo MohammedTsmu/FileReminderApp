@@ -46,6 +46,17 @@ namespace FileReminderApp
 
             // Check if the app is set to run at startup and set the checkbox accordingly
             chkRunAtStartup.Checked = IsStartupEnabled();
+
+            // Check if the app should start minimized
+            chkStartMinimized.Checked = Properties.Settings.Default.StartMinimized;
+
+            if (Properties.Settings.Default.StartMinimized)
+            {
+                this.WindowState = FormWindowState.Minimized;
+                this.Hide();
+                this.ShowInTaskbar = false;
+            }
+
         }
 
         // كود التعامل مع زر Minimize
@@ -420,5 +431,17 @@ namespace FileReminderApp
             // Enable or disable startup based on checkbox status
             SetStartup(chkRunAtStartup.Checked);
         }
+
+        //private void chkStartMinimized_CheckedChanged(object sender, EventArgs e)
+        //{
+
+        //}
+        private void chkStartMinimized_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.StartMinimized = chkStartMinimized.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+
     }
 }

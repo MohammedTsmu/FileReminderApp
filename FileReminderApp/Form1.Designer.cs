@@ -40,6 +40,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.chkRunAtStartup = new System.Windows.Forms.CheckBox();
+            this.chkStartMinimized = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lstTimes
@@ -179,7 +180,7 @@
             this.chkRunAtStartup.BackColor = System.Drawing.Color.DimGray;
             this.chkRunAtStartup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkRunAtStartup.ForeColor = System.Drawing.SystemColors.Window;
-            this.chkRunAtStartup.Location = new System.Drawing.Point(882, 30);
+            this.chkRunAtStartup.Location = new System.Drawing.Point(832, 30);
             this.chkRunAtStartup.Name = "chkRunAtStartup";
             this.chkRunAtStartup.Size = new System.Drawing.Size(252, 29);
             this.chkRunAtStartup.TabIndex = 14;
@@ -187,12 +188,27 @@
             this.chkRunAtStartup.UseVisualStyleBackColor = false;
             this.chkRunAtStartup.CheckedChanged += new System.EventHandler(this.chkRunAtStartup_CheckedChanged);
             // 
+            // chkStartMinimized
+            // 
+            this.chkStartMinimized.AutoSize = true;
+            this.chkStartMinimized.BackColor = System.Drawing.Color.DimGray;
+            this.chkStartMinimized.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkStartMinimized.ForeColor = System.Drawing.SystemColors.Window;
+            this.chkStartMinimized.Location = new System.Drawing.Point(832, 65);
+            this.chkStartMinimized.Name = "chkStartMinimized";
+            this.chkStartMinimized.Size = new System.Drawing.Size(260, 29);
+            this.chkStartMinimized.TabIndex = 15;
+            this.chkStartMinimized.Text = "Minimize to tray on startup";
+            this.chkStartMinimized.UseVisualStyleBackColor = false;
+            this.chkStartMinimized.CheckedChanged += new System.EventHandler(this.chkStartMinimized_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(1162, 633);
+            this.Controls.Add(this.chkStartMinimized);
             this.Controls.Add(this.chkRunAtStartup);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -228,6 +244,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkRunAtStartup;
+        private System.Windows.Forms.CheckBox chkStartMinimized;
     }
 }
 

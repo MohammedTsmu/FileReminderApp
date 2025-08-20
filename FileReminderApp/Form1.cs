@@ -185,8 +185,8 @@ namespace FileReminderApp
         {
             try
             {
-                // عرض المسار الكامل في رسالة للتأكد من أن المسار صحيح
-                MessageBox.Show($"فتح الملف: {filePath}", "تذكير", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //// عرض المسار الكامل في رسالة للتأكد من أن المسار صحيح
+                //MessageBox.Show($"فتح الملف: {filePath}", "تذكير", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // فتح الملف باستخدام المسار الكامل
                 System.Diagnostics.Process.Start(filePath);

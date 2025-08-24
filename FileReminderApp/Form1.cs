@@ -173,6 +173,19 @@ namespace FileReminderApp
                         if (currentTime.Hour == reminderTime.Hour && currentTime.Minute == reminderTime.Minute)
                         {
                             ShowReminder(filePath); // تمرير المسار الكامل للملف
+
+                            //show visual reminder window onnly once per reminder, if another reminder at the same time and visual reminder still open not closed it will not open another one
+                            var openForms = Application.OpenForms.Cast<Form>();
+                            if (!openForms.Any(f => f is VisualReminder))
+                            {
+                                //sound notification
+                                System.Media.SystemSounds.Exclamation.Play();
+                                // فتح نافذة التذكير البصري
+                                var visualReminder = new VisualReminder();
+                                visualReminder.Show();
+                                visualReminder.BringToFront(); // جلب النافذة إلى الأمام
+                                visualReminder.FormClosed += (s, args) => visualReminder.Dispose(); // تحرير الموارد عند إغلاق النافذة
+                            }
                         }
                     }
                 }
